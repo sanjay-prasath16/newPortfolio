@@ -1,5 +1,5 @@
 // images import
-import Greater from "../assets/name symbol.svg";
+import Greater from "../assets/nameSymbol.svg";
 import Download from "../assets/download.svg";
 import MyImg from "../assets/Home_Image.png";
 import React from "../assets/react.svg";
