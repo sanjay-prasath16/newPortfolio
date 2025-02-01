@@ -203,7 +203,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
       </div>
 
       {/* Navbar Sections */}
-      <div className="mt-[15%] pl-[5%] h-[80%] flex flex-col justify-between">
+      <div className="mt-[15%] pl-[5%] h-[80%] flex flex-col justify-between text-[20px]">
         <div>
           <div className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon

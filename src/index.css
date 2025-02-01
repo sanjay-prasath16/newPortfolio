@@ -18,7 +18,7 @@
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-size: clamp(18px, 3vw, 20px);
+  font-size: clamp(18px, 3vw, 24px);
 }
 
 // Navbar
