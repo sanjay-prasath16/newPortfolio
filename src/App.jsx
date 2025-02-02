@@ -1,8 +1,8 @@
-import { useState } from 'react';
-
-// Component import
-import Navbar from './Components/Navbar';
-import Home from './Pages/Home';
+import { useState } from "react";
+import Navbar from "./Components/Navbar";
+import Home from "./Pages/Home";
+import Services from "./Pages/Services";
+import ClickSpark from "./Components/ClickSpark";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -10,14 +10,16 @@ const App = () => {
 
   return (
     <div
-      className={`flex ${isDarkMode ? 'bg-[#121212] text-white' : 'bg-white text-[#121212]'} Baloo`}
+      className={`flex ${isDarkMode ? "bg-[#121212] text-white" : "bg-white text-[#121212]"} Baloo relative`}
     >
-      <div className={`navbar-transition ${navSize ? "w-[18%] h-screen" : "w-[8%] h-screen"}`}>
+      <div className={`navbar-transition ${navSize ? "w-[18%] h-screen" : "w-[8%] h-screen"} sticky top-0 z-10`}>
         <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} navSize={navSize} setNavSize={setNavSize} />
       </div>
-      <div className="w-[85%] h-screen">
-        <Home navSize={navSize} />
+      <div className="w-[82%]">
+        <Home isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+        <Services isDarkMode={isDarkMode} />
       </div>
+      <ClickSpark sparkColor={isDarkMode ? "#fff" : "#000"} />
     </div>
   );
 };

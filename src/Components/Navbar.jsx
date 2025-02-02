@@ -7,8 +7,9 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
+  faCode,
   faBook,
-  faTerminal,
+  faScrewdriverWrench,
   faCrosshairs,
   faHashtag,
   faMoon,
@@ -68,18 +69,19 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
 
   const navItems = [
     { id: "home", label: "Home", icon: faUser },
+    { id: "services", label: "Services", icon: faCode },
     { id: "education", label: "Education", icon: faBook },
-    { id: "experience", label: "Experience", icon: faTerminal },
+    { id: "Tools", label: "Tools", icon: faScrewdriverWrench },
     { id: "projects", label: "Projects", icon: faCrosshairs },
     { id: "follow", label: "Follow", icon: faHashtag },
   ];
 
   if (windowWidth < 768) {
     return (
-      <div className="fixed z-50 w-full max-w-lg -translate-x-1/2 bg-[#181818] border border-[#363636] rounded-2xl bottom-4 left-1/2 shadow-lg">
+      <div className={`fixed z-50 w-full max-w-lg -translate-x-1/2 border rounded-2xl bottom-4 left-1/2 shadow-lg ${isDarkMode ? "bg-[#181818] border-[#363636]" : "bg-[#F7F7F8] border-black/20"}`}>
         <nav className="relative flex justify-between items-center h-20 mx-2">
           <motion.div
-            className="absolute h-14 bg-[#363636] rounded-2xl"
+            className={`absolute h-14 rounded-2xl ${isDarkMode ? "bg-[#363636]" : "bg-[#B3B3D1]"}`}
             layout
             transition={{
               type: "spring",
@@ -234,6 +236,33 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
           </div>
           <div className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon
+              icon={faCode}
+              className={`group-hover:animate-bounce cursor-pointer ${
+                isDarkMode ? "text-white/50" : "text-black/50"
+              } ${navSize ? "" : "mt-[35%] ml-[30%]"}`}
+            />
+            {navSize ? (
+              <p
+                className={`pl-[10%] group-hover:cursor-pointer mt-[-2%] ${
+                  isDarkMode ? "text-white/50" : "text-black/50"
+                }`}
+              >
+                Services
+              </p>
+            ) : (
+              <span
+                className={`tooltip ml-[-60%] mt-[17%] ${
+                  isDarkMode
+                    ? "bg-[#121212] border border-white/10"
+                    : "bg-white border border-black/10"
+                }`}
+              >
+                Services
+              </span>
+            )}
+          </div>
+          <div className="flex group nav-icon mb-[20%] relative">
+            <FontAwesomeIcon
               icon={faBook}
               className={`group-hover:animate-bounce cursor-pointer ${
                 isDarkMode ? "text-white/50" : "text-black/50"
@@ -261,7 +290,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
           </div>
           <div className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon
-              icon={faTerminal}
+              icon={faScrewdriverWrench}
               className={`group-hover:animate-bounce cursor-pointer ${
                 isDarkMode ? "text-white/50" : "text-black/50"
               } ${navSize ? "" : "mt-[25%] ml-[30%]"}`}
@@ -272,7 +301,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
                   isDarkMode ? "text-white/50" : "text-black/50"
                 }`}
               >
-                Experience
+                Tools
               </p>
             ) : (
               <span
@@ -282,7 +311,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
                     : "bg-white border border-black/10"
                 }`}
               >
-                Experience
+                Tools
               </span>
             )}
           </div>

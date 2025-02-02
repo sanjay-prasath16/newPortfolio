@@ -11,6 +11,7 @@
   font-weight: 800;
   font-style: normal;
   font-size: clamp(24px, 4vw, 32px);
+  white-space: pre-wrap;
 }
 
 .Baloo {
