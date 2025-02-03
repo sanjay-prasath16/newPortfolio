@@ -35,7 +35,7 @@ const Services = ({ isDarkMode }) => {
   return (
     <div className="lg:h-screen flex flex-col items-center lg:mt-0 mt-[10%]">
       <p className="Akatab flex justify-center text-2xl font-semibold">
-        WHAT <span className="text-[#6800F9] ml-2">SERVICES</span> I OFFER
+        WHAT<span className="text-[#6800F9] ml-2">SERVICES</span> I OFFER
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">

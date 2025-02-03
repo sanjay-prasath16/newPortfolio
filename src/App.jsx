@@ -3,6 +3,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Pages/Home";
 import Services from "./Pages/Services";
 import ClickSpark from "./Components/ClickSpark";
+import Career from './Pages/Career';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -18,6 +19,7 @@ const App = () => {
       <div className="w-[82%]">
         <Home isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         <Services isDarkMode={isDarkMode} />
+        <Career isDarkMode={isDarkMode} />
       </div>
       <ClickSpark sparkColor={isDarkMode ? "#fff" : "#000"} />
     </div>
