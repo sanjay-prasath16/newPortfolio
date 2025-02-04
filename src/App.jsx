@@ -4,6 +4,8 @@ import Home from "./Pages/Home";
 import Services from "./Pages/Services";
 import ClickSpark from "./Components/ClickSpark";
 import Career from './Pages/Career';
+import Tools from './Pages/Tools';
+import Projects from './Pages/Projects';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -20,6 +22,8 @@ const App = () => {
         <Home isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         <Services isDarkMode={isDarkMode} />
         <Career isDarkMode={isDarkMode} />
+        <Tools isDarkMode={isDarkMode} />
+        <Projects isDarkMode={isDarkMode} />
       </div>
       <ClickSpark sparkColor={isDarkMode ? "#fff" : "#000"} />
     </div>

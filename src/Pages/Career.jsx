@@ -1,7 +1,9 @@
+// npm packages import
+import PropTypes from "prop-types";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ExperienceEducation = () => {
+const Career = ({ isDarkMode }) => {
   const [activeType, setActiveType] = useState("education");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -19,7 +21,7 @@ const ExperienceEducation = () => {
   ];
 
   const data = activeType === "education" ? education : experience;
-  const duration = 5000; // 5 seconds per status
+  const duration = 5000;
 
   useEffect(() => {
     startProgress();
@@ -57,7 +59,7 @@ const ExperienceEducation = () => {
   };
 
   return (
-    <div className="bg-[#121212] text-white min-h-screen flex flex-col p-4 sm:p-6 md:p-8 lg:p-12 relative">
+    <div className="md:min-h-screen flex flex-col lg:p-12 relative">
       <div className="w-full text-center mb-8 pt-[5%]">
         <h1 className="mb-[3%] Akatab">
           <span className="text-[#6800F9]">CAREER</span> MILESTONES
@@ -66,16 +68,16 @@ const ExperienceEducation = () => {
 
       <div className="mb-[10%] flex justify-center">
         <button
-          className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full border-2 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 mr-[10%] ${
-            activeType === "education" ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-white" : "bg-transparent text-gray-300 border-gray-500"
+          className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full border-2 transition-all duration-300 hover:scale-105 mr-[10%] ${
+            activeType === "education" ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-none" : `bg-transparent ${isDarkMode ? "border-white" : "border-black"}`
           }`}
           onClick={() => handleTypeChange("education")}
         >
           Education
         </button>
         <button
-          className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full border-2 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-            activeType === "experience" ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-white" : "bg-transparent text-gray-300 border-gray-500"
+          className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full     border transition-all duration-300 hover:scale-105 ${
+            activeType === "experience" ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-none" : `bg-transparent ${isDarkMode ? "border-white" : "border-black"}`
           }`}
           onClick={() => handleTypeChange("experience")}
         >
@@ -83,9 +85,9 @@ const ExperienceEducation = () => {
         </button>
       </div>
 
-      <div className="flex justify-center mb-8 relative w-[100%] md:w-[80%] mx-auto">
+      <div className="flex justify-center mb-8 relative w-[100%] lg:w-[80%] lg:ml-[10%]">
         <button
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-transparent border border-gray-500 p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="absolute -left-[5%] top-[55%] lg:left-0 lg:top-1/2 transform -translate-y-1/2 bg-transparent border border-gray-500 p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500"
           onClick={prevItem}
         >
           &#8592;
@@ -101,16 +103,16 @@ const ExperienceEducation = () => {
             className="text-center space-y-2 sm:space-y-4"
           >
             <h3 className="Akatab">{data[currentIndex]?.title}</h3>
-            <p className="text-gray-300">
+            <p className={`${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>
               {activeType === "education" ? data[currentIndex]?.institution : data[currentIndex]?.company}
             </p>
-            <p className="text-gray-400 text-md sm:text-lg">{data[currentIndex]?.year}</p>
+            <p className="text-md sm:text-lg">{data[currentIndex]?.year}</p>
             <p className="text-[#6800F9] text-md sm:text-lg">{data[currentIndex]?.details}</p>
           </motion.div>
         </AnimatePresence>
 
         <button
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-transparent border border-gray-500 p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="absolute -right-[5%] top-[55%] lg:right-0 lg:top-1/2 transform -translate-y-1/2 bg-transparent border border-gray-500 p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500"
           onClick={nextItem}
         >
           &#8594;
@@ -133,4 +135,8 @@ const ExperienceEducation = () => {
   );
 };
 
-export default ExperienceEducation;
+Career.propTypes = {
+  isDarkMode: PropTypes.bool.isRequired,
+};
+
+export default Career;

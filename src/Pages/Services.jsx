@@ -13,7 +13,6 @@ import BlackUI from '../assets/BlackUI.svg';
 import ServiceCard from '../Components/ServiceCard';
 
 const Services = ({ isDarkMode }) => {
-  // Conditionally map the images based on isDarkMode
   const services = [
     {
       title: "Web Development",
