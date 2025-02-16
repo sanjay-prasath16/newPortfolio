@@ -117,7 +117,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
               key={id}
               type="button"
               onClick={() => setActive(id)}
-              className={`relative z-10 flex items-center justify-center flex-1 transition-all ${
+              className={`relative z-50 flex items-center justify-center flex-1 transition-all ${
                 active === id ? "text-white" : "text-gray-400 hover:text-white"
               }`}
             >

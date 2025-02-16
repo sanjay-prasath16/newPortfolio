@@ -15,7 +15,7 @@ const App = () => {
     <div
       className={`flex ${isDarkMode ? "bg-[#121212] text-white" : "bg-white text-[#121212]"} Baloo relative`}
     >
-      <div className={`navbar-transition ${navSize ? "w-[18%] h-screen" : "w-[8%] h-screen"} sticky top-0 z-10`}>
+      <div className={`navbar-transition ${navSize ? "w-[18%] h-screen" : "w-[8%] h-screen"} sticky top-0 z-50`}>
         <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} navSize={navSize} setNavSize={setNavSize} />
       </div>
       <div className="w-[82%]">
