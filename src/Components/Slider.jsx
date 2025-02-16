@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import PropTypes from "prop-types";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
@@ -11,21 +11,21 @@ import MunchSpot from "../assets/MunchSpot.jpg";
 import QuickBite from "../assets/Recipe.jpg";
 import TuneIn from "../assets/TuneIn.jpg";
 import VehicleRental from "../assets/VehicleRentalManagementSystem.jpg";
-import WhiteFlex from '../assets/AiInterviewLightTheme.jpg';
+import WhiteFlex from '../assets/FreelanceLightTheme.jpg';
 import WhiteHire from '../assets/AiInterviewLightTheme.jpg';
 import WhiteMunch from '../assets/MunchSpotLightTheme.jpg';
 import WhiteBite from '../assets/MunchSpotLightTheme.jpg';
 import WhiteTune from '../assets/TuneInLightTheme.jpg';
 
-const Slider = ({ autoplay = true, isDarkMode }) => {
-  const data = [
+const Slider = ({ autoplay = false, isDarkMode }) => {
+  const data = useMemo(() => [
     {
       place: "FlexWorker Platform",
       title: "FLEX",
       title2: "WORKER",
       description:
         "A platform connecting freelancers with flexible work opportunities.",
-      image: isDarkMode ? WhiteFlex : FlexWorker,
+      image: isDarkMode ? FlexWorker : WhiteFlex,
     },
     {
       place: "HireSmart Solution",
@@ -33,7 +33,7 @@ const Slider = ({ autoplay = true, isDarkMode }) => {
       title2: "SMART",
       description:
         "An AI-powered hiring platform for smarter recruitment processes.",
-      image: isDarkMode ? WhiteHire : HireSmart,
+      image: isDarkMode ? HireSmart : WhiteHire,
     },
     {
       place: "MunchSpot",
@@ -41,7 +41,7 @@ const Slider = ({ autoplay = true, isDarkMode }) => {
       title2: "SPOT",
       description:
         "A food discovery app helping users find their perfect dining spot.",
-      image: isDarkMode ? WhiteMunch : MunchSpot,
+      image: isDarkMode ? MunchSpot : WhiteMunch,
     },
     {
       place: "QuickBite",
@@ -49,7 +49,7 @@ const Slider = ({ autoplay = true, isDarkMode }) => {
       title2: "BITE",
       description:
         "An on-demand food delivery service for quick and easy meals.",
-      image: isDarkMode ? WhiteBite : QuickBite,
+      image: isDarkMode ? QuickBite : WhiteBite,
     },
     {
       place: "TuneIn Music Platform",
@@ -57,7 +57,7 @@ const Slider = ({ autoplay = true, isDarkMode }) => {
       title2: "IN",
       description:
         "A music streaming platform with personalized playlists and recommendations.",
-      image: isDarkMode ? WhiteTune : TuneIn,
+      image: isDarkMode ? TuneIn : WhiteTune,
     },
     {
       place: "VehicleRental",
@@ -67,7 +67,7 @@ const Slider = ({ autoplay = true, isDarkMode }) => {
         "An easy-to-use vehicle rental service for all your transportation needs.",
       image: VehicleRental,
     },
-  ];
+  ], [isDarkMode]);
 
   const sliderRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -87,11 +87,12 @@ const Slider = ({ autoplay = true, isDarkMode }) => {
   };
 
   useEffect(() => {
+    console.log(isDarkMode);
     if (autoplay) {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay, handleNext]);
+  }, [autoplay, handleNext, isDarkMode]);
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
@@ -356,7 +357,7 @@ const Slider = ({ autoplay = true, isDarkMode }) => {
     <>
       <div
         ref={sliderRef}
-        className="travel-slider relative lg:w-full lg:h-full text-white overflow-hidden lg:block hidden"
+        className="travel-slider relative lg:w-full lg:h-full overflow-hidden lg:block hidden"
       >
         <div id="demo" className="">
           {data.map((item, index) => (
@@ -367,7 +368,7 @@ const Slider = ({ autoplay = true, isDarkMode }) => {
                 style={{ backgroundImage: `url(${item.image})` }}
               ></div>
               <div
-                className="card-content absolute left-0 top-0 text-white pl-4"
+                className="card-content absolute left-0 top-0 pl-4"
                 id={`card-content-${index}`}
               >
                 <div className="content-start w-[30px] h-[5px] rounded-full bg-white"></div>
