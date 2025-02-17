@@ -7,6 +7,8 @@ import Career from './Pages/Career';
 import Tools from './Pages/Tools';
 import Projects from './Pages/Projects';
 import Contact from './Pages/Contact';
+import Follow from './Pages/Follow';
+import Footer from './Pages/Footer';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -26,6 +28,8 @@ const App = () => {
         <Tools isDarkMode={isDarkMode} />
         <Projects isDarkMode={isDarkMode} />
         <Contact isDarkMode={isDarkMode} />
+        <Follow isDarkMode={isDarkMode} />
+        <Footer isDarkMode={isDarkMode} />
       </div>
       <ClickSpark sparkColor={isDarkMode ? "#fff" : "#000"} />
     </div>

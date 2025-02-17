@@ -34,6 +34,14 @@
   font-size: clamp(20px, 3vw, 16px)
 }
 
+.FollowText {
+  font-size: clamp(70px, 3vw, 56px)
+}
+
+.CopyrightText {
+  font-size: clamp(15px, 3vw, 20px)
+}
+
 // Navbar
 
 .switch {
