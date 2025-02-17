@@ -87,7 +87,6 @@ const Slider = ({ autoplay = false, isDarkMode }) => {
   };
 
   useEffect(() => {
-    console.log(isDarkMode);
     if (autoplay) {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
@@ -98,7 +97,6 @@ const Slider = ({ autoplay = false, isDarkMode }) => {
     return Math.floor(Math.random() * 21) - 10;
   };
 
-  // Your existing code for larger devices
   useEffect(() => {
     if (sliderRef.current) {
       const cards = sliderRef.current.querySelectorAll(".card");
@@ -483,7 +481,7 @@ const Slider = ({ autoplay = false, isDarkMode }) => {
 
         <div className="cover absolute left-0 top-0 w-screen h-screen bg-white z-100"></div>
       </div>
-      <div className="block lg:hidden bg-[#121212]">
+      <div className="block lg:hidden">
         <div className="w-full mx-auto">
           <div className="relative grid grid-cols-1 md:grid-cols-2 pt-5">
             <div>
