@@ -21,7 +21,7 @@ const App = () => {
       <div className={`navbar-transition ${navSize ? "w-[18%] h-screen" : "w-[8%] h-screen"} sticky top-0 z-50`}>
         <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} navSize={navSize} setNavSize={setNavSize} />
       </div>
-      <div className="w-[82%]">
+      <div className={`${navSize ? "w-[82%]" : "w-[92%]"}`}>
         <Home isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         <Services isDarkMode={isDarkMode} />
         <Career isDarkMode={isDarkMode} />

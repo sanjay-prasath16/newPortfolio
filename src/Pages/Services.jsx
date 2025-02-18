@@ -32,7 +32,7 @@ const Services = ({ isDarkMode }) => {
   ];
 
   return (
-    <div className="lg:h-screen flex flex-col items-center lg:mt-0 mt-[10%]">
+    <div className="lg:h-screen flex flex-col items-center lg:mt-0 mt-[10%]" id="services">
       <p className="Akatab flex justify-center text-2xl font-semibold">
         WHAT<span className="text-[#6800F9] ml-2">SERVICES</span> I OFFER
       </p>

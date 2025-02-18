@@ -14,7 +14,7 @@ import Logo from "../assets/Bitmoji.png";
 
 const Home = ({ isDarkMode, setIsDarkMode }) => {
   return (
-    <div className="w-full lg:h-screen flex flex-col lg:flex-row lg:mt-0">
+    <div className="w-full lg:h-screen flex flex-col lg:flex-row lg:mt-0" id="home">
       <div className="flex justify-between md:hidden mt-2">
         <img src={Logo} alt="" className="w-[10%]" />
         <div className="relative mt-[2%]">

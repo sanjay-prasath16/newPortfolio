@@ -4,8 +4,8 @@ import LightContact from '../assets/ContactImage.png';
 
 const Contact = ({ isDarkMode }) => {
   return (
-    <div className="lg:w-full lg:h-screen lg:flex pt-[6%] relative overflow-hidden">
-      <div className="lg:w-[34%] lg:h-[80%] flex flex-col lg:justify-center items-center text-center p-6">
+    <div className="lg:w-full lg:h-screen lg:flex md:pt-[6%] relative overflow-hidden">
+      <div className="lg:w-[34%] lg:h-[80%] flex flex-col lg:justify-center items-center text-center md:p-6">
         {isDarkMode ?
           <img src={ContactImage} alt="" className="h-40 w-48" /> :
           <img src={LightContact} alt="" className="h-40 w-48" />
@@ -24,7 +24,7 @@ const Contact = ({ isDarkMode }) => {
         </div>
       </div>
 
-      <div className="lg:w-[52%] lg:h-[80%] bg-[#010D1B] flex flex-col justify-center px-6 md:px-10 lg:px-12 py-16 rounded-[20px] relative z-10">
+      <div className="lg:w-[52%] lg:h-[80%] bg-[#010D1B] flex flex-col justify-center px-6 md:px-10 lg:px-12 py-16 rounded-[20px] relative z-10 mt-10 md:mt-0">
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between">
           <div className="text-white text-5xl font-medium tracking-wide leading-tight mb-10 lg:mb-0">
             <p>CONTACT</p>

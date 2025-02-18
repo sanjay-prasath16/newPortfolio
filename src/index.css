@@ -12,6 +12,7 @@
   font-style: normal;
   font-size: clamp(24px, 4vw, 36px);
   white-space: pre-wrap;
+  line-height: 40px;
 }
 
 .Baloo {
@@ -39,7 +40,15 @@
 }
 
 .CopyrightText {
-  font-size: clamp(15px, 3vw, 20px)
+  font-size: clamp(15px, 3vw, 10px)
+}
+
+.ProjectText {
+  font-size: clamp(20px, 3vw, 16px)
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 // Navbar
@@ -130,4 +139,15 @@ input:checked + .switch:active::before {
 
 .group:hover .absolute {
   opacity: 1;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #553c9a #301934;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

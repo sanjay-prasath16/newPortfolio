@@ -59,7 +59,7 @@ const Career = ({ isDarkMode }) => {
   };
 
   return (
-    <div className="md:min-h-screen flex flex-col lg:p-12 relative">
+    <div className="md:min-h-screen flex flex-col lg:p-12 relative" id="education">
       <div className="w-full text-center mb-8 pt-[5%]">
         <h1 className="mb-[3%] Akatab">
           <span className="text-[#6800F9]">CAREER</span> MILESTONES

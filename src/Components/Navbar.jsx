@@ -1,6 +1,6 @@
 // npm packages import
 import { useEffect, useCallback, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
 
 // images import
@@ -14,7 +14,9 @@ import {
   faHashtag,
   faMoon,
   faSun,
+  faAddressBook,
 } from "@fortawesome/free-solid-svg-icons";
+import { GrAppsRounded } from "react-icons/gr";
 import Logo from "../assets/Bitmoji.png";
 import Minimize from "../assets/minimizeButton.svg";
 import blackMinimize from "../assets/Black Minimize Button.svg";
@@ -23,6 +25,11 @@ import blackMaximize from "../assets/Black Expand Button.svg";
 
 const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -63,77 +70,86 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
     };
   }, [handleKeyPress]);
 
-  // dock
-
   const [active, setActive] = useState("home");
 
   const navItems = [
-    { id: "home", label: "Home", icon: faUser },
-    { id: "services", label: "Services", icon: faCode },
-    { id: "education", label: "Education", icon: faBook },
-    { id: "Tools", label: "Tools", icon: faScrewdriverWrench },
-    { id: "projects", label: "Projects", icon: faCrosshairs },
-    { id: "follow", label: "Follow", icon: faHashtag },
+    { id: "home", label: "Home", icon: faUser, href: "#home" },
+    { id: "services", label: "Services", icon: faCode, href: "#services" },
+    { id: "education", label: "Education", icon: faBook, href: "#education" },
+    { id: "Tools", label: "Tools", icon: faScrewdriverWrench, href: "#tools" },
+    { id: "projects", label: "Projects", icon: faCrosshairs, href: "#projects" },
+    { id: "follow", label: "Follow", icon: faHashtag, href: "#follow" },
   ];
 
   if (windowWidth < 768) {
     return (
-      <div className={`fixed z-50 w-full max-w-lg -translate-x-1/2 border rounded-2xl bottom-4 left-1/2 shadow-lg ${isDarkMode ? "bg-[#181818] border-[#363636]" : "bg-[#F7F7F8] border-black/20"}`}>
-        <nav className="relative flex justify-between items-center h-20 mx-2">
-          <motion.div
-            className={`absolute h-14 rounded-2xl ${isDarkMode ? "bg-[#363636]" : "bg-[#B3B3D1]"}`}
-            layout
-            transition={{
-              type: "spring",
-              stiffness: 400,
-              damping: 30,
-            }}
-            style={{
-              width: `${
-                active === "projects"
-                  ? `calc(120% / ${navItems.length})`
-                  : ["education", "experience"].includes(active)
-                  ? `calc(125% / ${navItems.length})`
-                  : `calc(100% / ${navItems.length})`
-              }`,
-              left: `${
-                active === "projects"
-                  ? `calc((97% / ${navItems.length}) * ${navItems.findIndex(
-                      (item) => item.id === active
-                    )})`
-                  : ["education", "experience"].includes(active)
-                  ? `calc((90% / ${navItems.length}) * ${navItems.findIndex(
-                      (item) => item.id === active
-                    )})`
-                  : `calc((100% / ${navItems.length}) * ${navItems.findIndex(
-                      (item) => item.id === active
-                    )})`
-              }`,
-            }}
-          />
+      <motion.div
+        className={`fixed z-50 bottom-4 right-4 ${
+          isDarkMode ? "bg-[#181818]" : "bg-[#F7F7F8]"
+        } rounded-full shadow-lg`}
+        animate={{
+          x: isMenuOpen ? -80 : 0,
+          y: isMenuOpen ? -80 : 0,
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <motion.div
+          className="relative w-16 h-16 flex items-center justify-center rounded-full cursor-pointer"
+          onClick={toggleMenu}
+          style={{
+            backgroundColor: isMenuOpen ? "var(--violet)" : "var(--dark-violet)",
+          }}
+          whileTap={{ scale: 0.9 }}
+        >
+          {/* <FontAwesomeIcon
+            icon={faUser}
+            className={`text-xl ${
+              isDarkMode ? "text-white/50" : "text-black/50"
+            }`}
+          /> */}
+          <GrAppsRounded />
+        </motion.div>
 
-          {navItems.map(({ id, label, icon }) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => setActive(id)}
-              className={`relative z-50 flex items-center justify-center flex-1 transition-all ${
-                active === id ? "text-white" : "text-gray-400 hover:text-white"
-              }`}
-            >
-              <div className="flex items-center">
-                <FontAwesomeIcon icon={icon} className="text-xl" />
-
-                {active === id && (
-                  <span className="ml-2 text-sm font-medium transition-opacity">
+        <AnimatePresence>
+          {isMenuOpen && (
+            <>
+              {navItems.map(({ id, label, icon, href }, index) => (
+                <motion.div
+                  key={id}
+                  className="absolute flex flex-col items-center"
+                  style={{
+                    top: `calc(${Math.sin((index * Math.PI) / 3) * 100}px)`,
+                    left: `calc(${Math.cos((index * Math.PI) / 3) * 100}px)`,
+                  }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{ delay: index * 0.1, type: "spring", stiffness: 300 }}
+                >
+                  <motion.a
+                    href={href}
+                    className="w-12 h-12 flex items-center justify-center rounded-full bg-violet-500 text-white cursor-pointer"
+                    onClick={() => {
+                      setActive(id);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={icon} className="text-xl" />
+                  </motion.a>
+                  <motion.span
+                    className="text-xs mt-2 text-center text-white"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.1 + 0.2 }}
+                  >
                     {label}
-                  </span>
-                )}
-              </div>
-            </button>
-          ))}
-        </nav>
-      </div>
+                  </motion.span>
+                </motion.div>
+              ))}
+            </>
+          )}
+        </AnimatePresence>
+      </motion.div>
     );
   }
 
@@ -207,7 +223,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
       {/* Navbar Sections */}
       <div className="mt-[15%] pl-[5%] h-[80%] flex flex-col justify-between text-[20px]">
         <div>
-          <div className="flex group nav-icon mb-[20%] relative">
+          <a href="#home" className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon
               icon={faUser}
               className={`group-hover:animate-bounce cursor-pointer ${
@@ -233,8 +249,8 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
                 Home
               </span>
             )}
-          </div>
-          <div className="flex group nav-icon mb-[20%] relative">
+          </a>
+          <a href="#services" className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon
               icon={faCode}
               className={`group-hover:animate-bounce cursor-pointer ${
@@ -260,8 +276,8 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
                 Services
               </span>
             )}
-          </div>
-          <div className="flex group nav-icon mb-[20%] relative">
+          </a>
+          <a href="#education" className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon
               icon={faBook}
               className={`group-hover:animate-bounce cursor-pointer ${
@@ -287,8 +303,8 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
                 Education
               </span>
             )}
-          </div>
-          <div className="flex group nav-icon mb-[20%] relative">
+          </a>
+          <a href="#tools" className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon
               icon={faScrewdriverWrench}
               className={`group-hover:animate-bounce cursor-pointer ${
@@ -314,8 +330,8 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
                 Tools
               </span>
             )}
-          </div>
-          <div className="flex group nav-icon mb-[20%] relative">
+          </a>
+          <a href="#projects" className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon
               icon={faCrosshairs}
               className={`group-hover:animate-bounce cursor-pointer ${
@@ -341,8 +357,35 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
                 Projects
               </span>
             )}
-          </div>
-          <div className="flex group nav-icon mb-[20%] relative">
+          </a>
+          <a href="#contact" className="flex group nav-icon mb-[20%] relative">
+            <FontAwesomeIcon
+              icon={faAddressBook}
+              className={`group-hover:animate-bounce cursor-pointer ${
+                isDarkMode ? "text-white/50" : "text-black/50"
+              } ${navSize ? "" : "mt-[25%] ml-[30%]"}`}
+            />
+            {navSize ? (
+              <p
+                className={`pl-[10%] group-hover:cursor-pointer mt-[-2%] ${
+                  isDarkMode ? "text-white/50" : "text-black/50"
+                }`}
+              >
+                Contact me
+              </p>
+            ) : (
+              <span
+                className={`tooltip ml-[-60%] mt-[10%] ${
+                  isDarkMode
+                    ? "bg-[#121212] border border-white/10"
+                    : "bg-white border border-black/10"
+                }`}
+              >
+                Projects
+              </span>
+            )}
+          </a>
+          <a href="#follow" className="flex group nav-icon mb-[20%] relative">
             <FontAwesomeIcon
               icon={faHashtag}
               className={`group-hover:animate-bounce cursor-pointer ${
@@ -368,7 +411,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
                 Follow
               </span>
             )}
-          </div>
+          </a>
         </div>
         <div className="flex items-center relative">
           {navSize ? (

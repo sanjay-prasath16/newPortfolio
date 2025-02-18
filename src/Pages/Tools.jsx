@@ -32,7 +32,7 @@ const tools = [
 
 const Tools = () => {
   return (
-    <div className="w-full py-10 flex flex-col items-center lg:min-h-screen">
+    <div className="w-full py-10 flex flex-col items-center lg:min-h-screen" id="tools">
       <div className="text-center">
         <p className="Akatab font-semibold mb-[8%]">
           <span className="text-[#6800F9]">How</span> I provide services
