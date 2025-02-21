@@ -7,7 +7,7 @@ const Projects = ({ isDarkMode }) => {
       <p className="flex Akatab mb-4 text-white">
         MY <span className="text-[#6800F9] ml-2">LATEST WORKS</span>
       </p>
-      <div className="w-full flex-1">
+      <div className="w-[90%] flex-1">
         <Slider isDarkMode={isDarkMode} />
       </div>
     </div>

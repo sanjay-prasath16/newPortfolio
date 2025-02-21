@@ -24,7 +24,7 @@ const Contact = ({ isDarkMode }) => {
         </div>
       </div>
 
-      <div className="lg:w-[52%] lg:h-[80%] bg-[#010D1B] flex flex-col justify-center px-6 md:px-10 lg:px-12 py-16 rounded-[20px] relative z-10 mt-10 md:mt-0">
+      <div className="w-[95%] lg:w-[52%] lg:h-[80%] bg-[#010D1B] flex flex-col justify-center px-6 md:px-10 lg:px-12 py-16 rounded-[20px] relative z-10 mt-10 md:mt-0">
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between">
           <div className="text-white text-5xl font-medium tracking-wide leading-tight mb-10 lg:mb-0">
             <p>CONTACT</p>

@@ -84,7 +84,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
   if (windowWidth < 768) {
     return (
       <motion.div
-        className={`fixed z-50 bottom-4 right-4 ${
+        className={`fixed z-50 bottom-10 right-10 ${
           isDarkMode ? "bg-[#181818]" : "bg-[#F7F7F8]"
         } rounded-full shadow-lg`}
         animate={{
@@ -101,12 +101,6 @@ const Navbar = ({ isDarkMode, setIsDarkMode, navSize, setNavSize }) => {
           }}
           whileTap={{ scale: 0.9 }}
         >
-          {/* <FontAwesomeIcon
-            icon={faUser}
-            className={`text-xl ${
-              isDarkMode ? "text-white/50" : "text-black/50"
-            }`}
-          /> */}
           <GrAppsRounded />
         </motion.div>
 

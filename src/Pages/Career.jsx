@@ -85,7 +85,7 @@ const Career = ({ isDarkMode }) => {
         </button>
       </div>
 
-      <div className="flex justify-center mb-8 relative w-[100%] lg:w-[80%] lg:ml-[10%]">
+      <div className="flex justify-center mb-8 relative w-[90%] lg:w-[80%] lg:ml-[10%]">
         <button
           className="absolute -left-[5%] top-[55%] lg:left-0 lg:top-1/2 transform -translate-y-1/2 bg-transparent border border-gray-500 p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500"
           onClick={prevItem}
