@@ -1,4 +1,5 @@
 // npm packages import
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 // images import
@@ -13,8 +14,55 @@ import Github from "../assets/github.svg";
 import Logo from "../assets/Bitmoji.png";
 
 const Home = ({ isDarkMode, setIsDarkMode }) => {
+  const [isActive, setIsActive] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const magnetRef = useRef(null);
+  const disabled=false;
+  const activeTransition = "transform 0.3s ease-out";
+  const inactiveTransition = "transform 0.5s ease-in-out";
+
+  useEffect(() => {
+    if (disabled) {
+      setPosition({ x: 0, y: 0 });
+      return;
+    }
+
+    const handleMouseMove = (e) => {
+      if (!magnetRef.current) return;
+
+      const { left, top, width, height } =
+        magnetRef.current.getBoundingClientRect();
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+
+      const distX = Math.abs(centerX - e.clientX);
+      const distY = Math.abs(centerY - e.clientY);
+
+      if (distX < width / 2 + 100 && distY < height / 2 + 100) {
+        setIsActive(true);
+
+        const offsetX = (e.clientX - centerX) / 2;
+        const offsetY = (e.clientY - centerY) / 2;
+        setPosition({ x: offsetX, y: offsetY });
+      } else {
+        setIsActive(false);
+        setPosition({ x: 0, y: 0 });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [disabled]);
+
+  const transitionStyle = isActive ? activeTransition : inactiveTransition;
+
   return (
-    <div className="w-[95%] lg:w-full lg:h-screen flex flex-col lg:flex-row lg:mt-0" id="home">
+    <div
+      className="w-[95%] lg:w-full lg:h-screen flex flex-col lg:flex-row lg:mt-0"
+      id="home"
+    >
       <div className="flex justify-between md:hidden mt-2">
         <img src={Logo} alt="" className="w-14" />
         <div className="relative mt-[2%]">
@@ -51,21 +99,28 @@ const Home = ({ isDarkMode, setIsDarkMode }) => {
           functional and intuitive experiences
         </p>
         <div className="flex w-full justify-between">
-          <a
-            href="/Resume/sanjayPrasathResume.pdf"
-            className="flex whitespace-nowrap mt-[10%]"
-            download
-          >
-            <img src={Download} alt="" className="h-[50%] mr-[10%]" />
-            <span className="text-[#6800F9]">Download CV</span>
-          </a>
+          <div ref={magnetRef} className="relative inline-block mt-[12%]">
+            <a
+              href="/Resume/sanjayPrasathResume.pdf"
+              className="flex whitespace-nowrap"
+              download
+              style={{
+                transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+                transition: transitionStyle,
+                willChange: "transform",
+              }}      
+            >
+              <img src={Download} alt="" className="h-[50%] mr-[10%]" />
+              <span className="text-[#6800F9]">Download CV</span>
+            </a>
+          </div>
           <div
             className={`px-10 left-0 top-0 rounded-[10px] shadow-[-1px_2px_8px_0.800000011920929px_rgba(32,15,72,1.00)] mt-[8%] flex pl-[1%] ${
               isDarkMode ? "bg-[#13131C]" : "bg-[#E3E3EC]"
             }`}
           >
             <p className="ml-[7%] justify-center flex h-full font-bold text-[40px] text-[#6800F9]">
-              12
+              11
             </p>
             <div className="flex flex-col h-full justify-center ml-[10%]">
               <span className="text-[16px]">MONTHS</span>
